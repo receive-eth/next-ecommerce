@@ -1,0 +1,53 @@
+.header {
+    top: 0;
+    position: sticky;
+    background-color: white;
+    z-index: 3;
+}
+
+.main_header_block {
+    background-color: white;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.main_header_block div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main_header_title {
+    display: flex;
+    align-items: center;
+}
+
+.cart_title {
+    font-size: 2rem;
+}
+
+.items_count {
+    color: #888888;
+    font-size: 1.4rem;
+}
+
+.delete_icon_btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.delete_icon_btn span:last-child {
+    color: #888888;
+}
+ 
+.separator {
+    margin-bottom: 3rem;
+    height: 1px;
+    border-bottom: 1px solid #e5e5e5;
+}

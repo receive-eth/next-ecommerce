@@ -1,0 +1,133 @@
+.wrapper {
+    min-height: inherit;
+    display: flex;
+    gap: 5%;
+}
+
+.images_container {
+    max-width: 55%;
+    min-height: inherit;
+}
+
+.product_info_container {
+    position: relative;
+    height: inherit;
+    width: 45%;
+}
+
+.sticky {
+    position: sticky;
+    top: 3rem;
+}
+
+.product_image {
+    width: 100%;
+    height: auto;
+}
+
+.product_title {
+    line-height: 2.2rem;
+    display: inline-block;
+    width: 83%;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.product_info {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.brand {
+    color: #818181;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.price {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.product_info div {
+    font-size: .9rem;
+    font-weight: 500;
+    color: #818181;
+}
+
+.form {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.form button {
+    height: 50px;
+    width: 60%;
+    background-color: black;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: .9rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+.favorites_wrapper {
+    position: relative;
+    right: 5%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+}
+
+.favorites_wrapper:hover > .favorites_icon {
+    top: 45%;
+}
+
+.favorites_icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 25px;
+    width: 25px;
+    transition: .2s ease-in-out;
+}
+
+.loyality_block {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    width: 100%;
+    height: 10rem;
+    border: 1px solid #e0e0e0;
+}
+
+.loyality_block span {
+    font-weight: 500;
+}
+
+.loyality_block p {
+    line-height: 2;
+    margin-top: 1rem;
+    font-size: .9rem;
+    color: #818181;
+}
+
+.loyality_block p a {
+    text-decoration: underline;
+    text-underline-offset: 2;
+}
+
+.loyality_block p strong {
+    color: black;
+}
+
+
+

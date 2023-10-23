@@ -1,0 +1,32 @@
+.container {
+    display: "flex";
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile_sidebar {
+    height: fit-content;
+    padding: .5rem 1rem;
+    width: 25%;
+    border: 1px solid #e0e0e0;
+    /* height: 300px; */
+    list-style-type: none;
+    line-height: 3rem;
+}
+
+.profile_main {
+    width: 70%;
+    /* border: 1px solid red; */
+}
+
+
+.active_link {
+    font-weight: 600;
+    color: #000000;
+}

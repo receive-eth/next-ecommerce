@@ -1,0 +1,100 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.input_group {
+    display: flex;
+    align-items: flex-end;
+    gap: .5rem;
+}
+
+.input_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: .2rem;
+}
+
+.wrapper:hover {
+    cursor: text
+}
+
+.wrapper input {
+    border: none;
+    background: none;
+    padding: .2rem 0;
+    height: 100%;
+    font-size: 1rem;
+}
+
+.wrapper input:focus {
+    outline: none;
+}
+
+.title {
+    display: inline-block;
+    color: #8b8b8b;
+    font-size: .9rem;
+    line-height: 1.2rem;
+    transform: translate(0, 50%);
+    transition: all .08s ease-in-out;
+}
+
+.active_title {
+    display: inline-block;
+    color: #8b8b8b;
+    font-size: 0.7rem;
+    line-height: 1.2rem;
+    transition: all .08s ease-out;
+}
+
+.active_title:hover, .title:hover {
+    cursor: text;
+}
+
+.input_with_btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.apply_btn {
+    width: 40%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    background: none;
+}
+
+.apply_btn:hover {
+    cursor: pointer;
+}
+
+.reset_promo_icon {
+    width: 20px;
+    height: 20px;
+    stroke: #000000;
+}
+
+.reset_promo_btn {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.reset_promo_btn:hover {
+    cursor: pointer;
+}
+
+
+.valid_message {
+    font-size: .8rem;
+    color: green;
+}
+
+.error_message {
+    font-size: .8rem;
+    color: red;
+}

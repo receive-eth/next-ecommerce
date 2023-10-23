@@ -1,0 +1,29 @@
+.crumbs_wrapper_left, .crumbs_wrapper_middle {
+    margin-top: 2rem;
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    font-size: .9rem;
+}
+
+.crumbs_wrapper_middle {
+    justify-content: center;
+}
+
+
+.separator{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.crumb {
+    color: #818181;
+}
+
+.crumb a {
+    text-decoration: underline;
+}
+
+.crumb_no_underline a {
+    color: #818181;
+}

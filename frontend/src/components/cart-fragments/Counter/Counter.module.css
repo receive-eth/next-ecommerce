@@ -1,0 +1,23 @@
+.wrapper {
+    width: 8rem;
+    height: 35px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .8rem;
+    font-weight: 500;
+}
+
+.wrapper button {
+    background: none;
+    border: none;
+    height: 100%;
+    width: 30%;
+}
+
+.wrapper button:hover {
+    cursor: pointer;
+}
+

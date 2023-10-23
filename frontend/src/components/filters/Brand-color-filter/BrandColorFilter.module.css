@@ -1,0 +1,160 @@
+.filter_wraper {
+    width: 20%;
+    position: relative;
+}
+
+.filter_visible, .filter_visible_fulfilled {
+    height: 50px;
+    padding: 1rem;
+    border: 1px solid #818181;
+    display: flex;
+    /* justify-content: flex-start; */
+    justify-content: center;
+    align-items: center;
+    font-size: .9rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    flex-direction: column;
+}
+
+ .filter_visible_fulfilled {
+    border: 2px solid black;
+ }
+
+
+.filter_visible:hover {
+    cursor: pointer;
+}
+
+.filter_title {
+    max-width: 85%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+}
+
+.filter_subtitle {
+    color: #585858;
+    font-size: .75rem;
+    text-align: start;
+    width: 100%;
+    margin-bottom: 2px;
+}
+
+.combined_filter_title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* text-align: start; */
+    align-items: center;
+    position: relative;
+}
+
+.dropdown_arrow {
+    position: absolute;
+    z-index: 1;
+    right: 8%;
+    width: 20px;
+    height: 20px;
+    fill: black;
+}
+
+.dropdown_arrow_dropped {
+    position: absolute;
+    z-index: 1;
+    right: 8%;
+    width: 20px;
+    height: 20px;
+    fill: black;
+    transform: scaleY(-1);
+}
+
+.filter_hidden {
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    border-top: none;
+    padding: 1rem;
+    height: fit-content;
+    border: 1px solid #818181;
+}
+
+.input {
+    width: 100%;
+    height: 2.5rem;
+    padding: 1rem;
+    background-color: #ededed;
+    border: none;
+    outline: none;
+}
+
+.items_list {
+    width: 100%;
+    margin-top: 1rem;
+    list-style-type: none;
+}
+
+.item {
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.hide_checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.check {
+    padding-left: 1.5rem;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+}
+
+.check .label_text {
+    margin-left: .5rem;
+}
+
+.check:hover {
+    cursor: pointer;
+}
+
+.checkbox {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid black;
+    margin-left: -1.5rem;
+    background-size: 100px 100px;
+}
+
+.checkbox:hover {
+    cursor: pointer;
+}
+
+.hide_checkbox:checked + .checkbox::before {
+    width: 1rem;
+    height: 1rem;
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: ' ';
+}
+
+.hide_checkbox:checked ~ .label_text {
+    font-weight: 500;
+}
+
+.items_count {
+    color: #818181;
+    font-size: 0.9rem;
+}
+

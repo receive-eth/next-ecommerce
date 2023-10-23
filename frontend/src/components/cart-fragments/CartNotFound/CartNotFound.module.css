@@ -1,0 +1,22 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right h3 {
+    font-size: 1.5rem;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button {
+    margin-top: 10px;
+    width: 150px;
+    height: 30px;
+}

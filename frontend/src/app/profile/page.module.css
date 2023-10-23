@@ -1,0 +1,88 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+.page_title {
+    font-size: 1.2rem;
+}
+
+.section_title {
+    font-size: 1.1rem;
+    color: #585858;
+}
+
+.account_info_block {
+    display: flex;
+    flex-direction: column;
+}
+
+.rectangle_group {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rectangle {
+    min-height: 90px;
+    padding: .5rem;
+    width: 45%;
+    border: 1px solid #e0e0e0;
+    font-size: .9rem;
+}
+
+.rectangle span {
+    color: #222222;
+    font-weight: 900;
+    font-size: 1rem;
+    line-height: 2rem;
+}
+
+.rectangle p {
+    color: #585858;
+    margin-top: 5px;
+}
+
+.rectangle_actions {
+    margin-top: 1rem;
+    font-size: .8rem;
+    display: flex;
+    gap: 1rem;
+    text-decoration: underline;
+}
+
+.account_info_block span {
+    font-weight: 500;
+}
+
+
+.wishlist_block {
+    color: #585858;
+    margin-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+    width: 100%;
+    padding: 2rem 0rem;
+}
+
+.wishlist_block .title_container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.title_container span {
+    font-size: 1.2rem;
+}
+
+.title_container a {
+    text-decoration: underline;
+    font-size: .9rem;
+}
+
+.wishlist_items {
+    margin-top: 1rem;
+    font-size: .9rem;
+}

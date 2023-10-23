@@ -1,0 +1,28 @@
+.categoryTitle {
+    text-align: center;
+    width: 100%;
+}
+
+.categoryTitle div {
+    margin-top: .4rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.categoryTitle h1 {
+    font-size: 1.8rem;
+}
+
+.categoryTitle span {
+    font-size: .8rem;
+    margin: 0 2rem;
+    color: #818181;
+    white-space: nowrap;
+    letter-spacing: 3px;
+}
+
+.line {
+    border-top: 1px solid #e0e0e0;
+}

@@ -1,0 +1,25 @@
+.wrapper {
+    margin-top: 1rem;
+}
+
+.list_title {
+    font-size: 1.5rem;
+}
+
+.list {
+    padding: .5rem 0;
+    height: fit-content;
+    position: relative;
+}
+
+.list_element, .list_element_underlined {
+    display: flex;
+    padding: .8rem .5rem;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.list_element_underlined {
+    border-bottom: 1px solid #e5e5e5;
+}
+

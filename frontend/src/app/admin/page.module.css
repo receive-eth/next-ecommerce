@@ -1,0 +1,81 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    min-height: inherit;
+    flex-direction: column;
+}
+
+.file_input_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.hidden_file_input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.visible_file_input {
+    min-width: 150px;
+    height: 50px;
+    font-size: .9rem;
+}
+
+
+.selectedImages {
+    margin-top: 2rem;
+    padding: .5rem;
+    display: flex;
+    height: fit-content;
+    font-size: .5rem;
+    box-shadow: 0 0 0 1px #e0e0e0;
+}
+
+.image_choice_wrapper {
+    border: none;
+}
+
+.image_wrapper {
+    position: relative;
+}
+
+.image_choice {
+    transition: .3s ease-in-out;
+}
+
+
+.image_choice:hover {
+    fill: black;
+}
+
+
+.delete_image {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: -5%;
+    top: 0;
+}
+
+.submit_button {
+    margin-top: 2rem;
+    width: 20%;
+    height: 50px;
+    background: none;
+    border: 1px solid #767676;
+    transition: .2s ease-in-out;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+.submit_button:hover {
+    background-color: black;
+    color: #fff;
+}

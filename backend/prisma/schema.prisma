@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId         String   @id @unique @default(uuid())
+  createdAt      DateTime @default(now())
+  firstName      String
+  lastName       String
+  role           Role     @default(USER)
+  gender         String
+  email          String   @unique
+  password       String
+  isActivated    Boolean  @default(false)
+  activationLink String
+  token          Token?
+  reviews        Review[]
+  cart           Cart?
+  discount       PersonalDiscount[]
+}
+
+model PersonalDiscount {
+  id        String @id @unique @default(uuid())
+  promocode String 
+  percent   Int
+  isUsed    Boolean @default(false)
+  maxActivations Int
+  user    User? @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  userId  String? @default(uuid())
+}
+
+
+enum DiscountStatus {
+  Active
+  Inactive
+}
+
+model Token {
+  tokenId      String @id @unique @default(uuid())
+  user         User   @relation(fields: [tokenId], references: [userId], onDelete: Cascade)
+  refreshToken String
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Category {
+  Sneakers
+  Apparel
+  Accessoires
+}
+
+enum MenuCategory {
+  Men
+  Women
+  Kids
+  Brands
+}
+
+model CartItem {
+  id          String  @id @unique @default(uuid())
+  productId   String
+  productInfo Product @relation(fields: [productId], references: [productId], onDelete: Cascade)
+  count       Int?
+  isSelected  Boolean @default(true)
+  size        Size[]
+  cartId      String?
+  Cart        Cart?   @relation(fields: [cartId], references: [cartId], onDelete: Cascade)
+}
+
+model Cart {
+  cartId String     @id @unique @default(uuid())
+  user   User       @relation(fields: [cartId], references: [userId], onDelete: Cascade)
+  Items  CartItem[]
+}
+
+model Product {
+  productId    String       @id @unique @default(uuid())
+  name         String       @unique
+  description  String
+  brand        Brand        @relation(fields: [brandId], references: [id])
+  brandId      String
+  size         Size[]
+  // sizeId       String       @unique @default(uuid())
+  color        Color        @relation(fields: [colorId], references: [id])
+  colorId      String
+  CartItem     CartItem[]
+  images       String[]
+  price        Int
+  category     Category
+  menuCategory MenuCategory
+  reviews      Review[]
+  article      String       @unique
+  slug         String       @unique
+}
+
+model Size {
+  sizeId   String     @id @unique @default(uuid())
+  product  Product[]
+  CartItem CartItem[]
+  sm       String
+  eu       String // доставать только eu, если вещь не является обувью
+  uk       String
+  us       String
+  stock    Int
+}
+
+model Brand {
+  id       String    @id @unique @default(uuid())
+  name     String    @unique
+  products Product[]
+}
+
+model Color {
+  id       String    @id @unique @default(uuid())
+  name     String    @unique
+  products Product[]
+}
+
+model Review {
+  reviewId String  @id @unique @default(uuid())
+  author   User    @relation(fields: [authorId], references: [userId])
+  authorId String  @unique
+  product  Product @relation(fields: [reviewId], references: [productId])
+  rating   Int
+  comment  String
+}

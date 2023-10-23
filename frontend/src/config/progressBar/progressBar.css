@@ -1,0 +1,12 @@
+@import "nprogress/nprogress.css";
+
+#nprogress .bar {
+  background: gray;
+  height: 3px;
+}
+
+
+#nprogress .peg {
+  box-shadow: none
+}
+

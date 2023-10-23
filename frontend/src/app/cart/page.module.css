@@ -1,0 +1,23 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+}
+
+.left_block {
+    width: 70%;
+}
+
+.right_block {
+    margin-left: auto;
+    width: 30%;
+}
+
+.calculations_block {
+    top: 0.5rem;
+    width: 100%;
+    border-bottom: #888888;
+    height: 300px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px #888888;
+}
