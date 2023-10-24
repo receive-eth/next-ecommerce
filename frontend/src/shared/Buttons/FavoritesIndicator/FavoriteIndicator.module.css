@@ -1,0 +1,12 @@
+.wrapper {
+    border: none;
+    background: none;
+}
+
+.wrapper:hover {
+    cursor: pointer;
+}
+
+.wrapper:focus {
+    outline: none;
+}

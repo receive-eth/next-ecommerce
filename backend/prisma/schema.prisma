@@ -104,6 +104,11 @@ model Product {
   slug         String       @unique
 }
 
+// model Favorite {
+//   id String @id @unique @default (uuid())
+// }
+
+
 model Size {
   sizeId   String     @id @unique @default(uuid())
   product  Product[]

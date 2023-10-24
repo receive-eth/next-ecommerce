@@ -1,6 +1,7 @@
 .filter_wrapper {
     width: 20%;
     position: relative;
+    z-index: 10;
 }
 
 .filter_visible, .filter_visible_fulfilled {

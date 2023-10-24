@@ -8,6 +8,7 @@ import ProductService from "@/services/ProductService"
 import qs from 'qs'
 import { notFound } from "next/navigation"
 import { IFilterPositions } from "./types";
+import DefaultProduct from "@/shared/ListItems/Default/DefaultListItem";
 
 const Product = ({ name, brand, color, price, images, category, slug }: any) => {
 	return (
@@ -102,14 +103,25 @@ export default async function Products({ searchParams, params }: { searchParams:
 				/>
 				<div className={styles.products_wrapper}>
 					{products.map((product: any) => (
-						<Product
+						// <Product
+						// 	key={product.article}
+						// 	name={product.name}
+						// 	brand={product.brand.name}
+						// 	color={product.color.name}
+						// 	price={product.price}
+						// 	images={product.images}
+						// 	article={product.article}
+						// 	category={params.category}
+						// 	slug={product.slug}
+						// />
+						<DefaultProduct
 							key={product.article}
 							name={product.name}
 							brand={product.brand.name}
 							color={product.color.name}
 							price={product.price}
 							images={product.images}
-							article={product.article}
+							// article={product.article}
 							category={params.category}
 							slug={product.slug}
 						/>

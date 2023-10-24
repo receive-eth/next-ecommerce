@@ -18,3 +18,7 @@ export { default as CartNoItems } from './Cart_no_items.svg'
 export { default as RightArrow } from './Right_arrow.svg'
 export { default as LeftArrow } from "./Left_arrow.svg"
 export { default as ClosePopup } from "./Close_popup.svg"
+
+
+export { default as FavoritesHeart } from './Heart.svg'
+export { default as FavoritesHeartSelected } from "./Heart_selected.svg"
