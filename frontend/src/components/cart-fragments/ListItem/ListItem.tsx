@@ -6,15 +6,16 @@ import Counter from "../Counter/Counter"
 import styles from './ListItem.module.css'
 import { useActions } from "@/hooks/useActions"
 import { useAuth } from "@/hooks/useAuth"
-import { ISize } from "@/models/ISize"
-import { Trash, FavoritesThin } from "@/components/SVGS"
+import { Trash } from "@/components/SVGS"
 import { useState } from "react"
 import ProductPopup from "@/shared/Popups/ProductPopup/ProductPopup"
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock"
-import { useClickOutside } from "@/hooks/useClickOutside"
 import { ICartItem } from "@/models/ICartItem"
 import { useCart } from "@/hooks/useCart"
 import DiscountBadge from "@/shared/Other/DiscountBadge/DiscountBadge"
+import FavoritesIndicator from "@/shared/Buttons/FavoritesIndicator/FavoritesIndicator"
+import { useFavorites } from "@/hooks/useFavorites"
+import { checkWhetherInFavorites } from "@/utils/checkWhetherInFavorites"
 
 interface IListItem {
 	productData: ICartItem
@@ -25,7 +26,7 @@ const ListItem = ({
 	productData,
 	dynamicClasses
 }: IListItem) => {
-	const { incrementQuantity, decrementQuantity, toggleProducts, removeFromCart } = useActions()
+	const { incrementQuantity, decrementQuantity, toggleProducts, removeFromCart, addToFavorites, removeFromFavorites } = useActions()
 	const { user } = useAuth()
 	const { amountOfDiscount, discount, anonimousCartId } = useCart()
 
@@ -33,16 +34,35 @@ const ListItem = ({
 	const [isPopupShowing, setPopupShowing] = useState<boolean>(false)
 	const [lockScroll, _] = useBodyScrollLock()
 
+	const { isLoading, products } = useFavorites()
 	const handleOpenPopup = () => {
 		setPopupShowing(true)
 		lockScroll()
 	}
+
+	const [isHovering, setHovering] = useState(false)
 
 	const calculateDiscountedPrice = (initialPrice: number, count: number, percent: number | undefined) => {
 		if (!percent) return initialPrice
 		const fullPrice = initialPrice * count
 		const discountAmount = (fullPrice * percent) / 100
 		return fullPrice - discountAmount
+	}
+
+	const isInFavorites = checkWhetherInFavorites({
+		user,
+		isLoading,
+		products,
+		productId: productData.productId,
+	})
+
+
+	const handleClick = (productId: string) => {
+		if (!user) return
+		if (!isInFavorites)
+			return addToFavorites({ userId: user.id, productId: productId })
+
+		return removeFromFavorites({ userId: user.id, productId: productId })
 	}
 
 	return (
@@ -116,13 +136,21 @@ const ListItem = ({
 						/>
 						{isMenuShowing && (
 							<div className={styles.item_control}>
-								<label>
-									<FavoritesThin
-										width={25}
-										height={25}
-										className={styles.icon_btn}
+								<label
+									onMouseEnter={() => setHovering(true)}
+									onMouseLeave={() => setHovering(false)}
+								>
+									<FavoritesIndicator
+										isShowing={true}
+										isInFavorites={isInFavorites}
+										isGray={!isHovering}
+										onClick={() => handleClick(productData.productId)}
 									/>
-									<span>Add to favorites</span>
+									{isInFavorites ? (
+										<span>In favorites</span>
+									) : (
+										<span>Add to favorites</span>
+									)}
 								</label>
 								<label
 									onClick={() =>

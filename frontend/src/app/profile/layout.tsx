@@ -27,9 +27,9 @@ export default function ProfileLayout({
 
 	const profileSidebarLinks = [
 		{ name: "Account information", href: "/profile" },
-		{ name: "My addresses", href: "/profile/addresses" },
-		{ name: "My orders", href: "/profile/orders" },
-		{ name: "My Raffles", href: "/profile/raffles" },
+		{ name: "My Addresses", href: "/profile/addresses" },
+		{ name: "My Orders", href: "/profile/orders" },
+		{ name: "My Favorites", href: "/profile/favorites" },
 		{ name: "Loyality points", href: "/profile/loyality" },
 		{ name: "Newsletter subscriptions", href: "/profile/newsletter" },
 		{ name: "Sign out", href: "#", action: handleLogout },
@@ -53,7 +53,10 @@ export default function ProfileLayout({
 						)
 					})}
 				</ul>
-				<div className={styles.profile_main}>{children}</div>
+				<div className={styles.profile_main}>
+					
+					{children}
+				</div>
 			</div>
 	)
 }

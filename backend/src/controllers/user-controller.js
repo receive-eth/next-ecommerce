@@ -37,7 +37,8 @@ class UserController {
 				httpOnly: true,
 			})
 
-			return res.json(userData)
+			// return res.json(userData)
+			res.json(userData)
 		} catch (e) {
 			next(e)
 		}

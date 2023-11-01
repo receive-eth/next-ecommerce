@@ -8,30 +8,9 @@ import ProductService from "@/services/ProductService"
 import qs from 'qs'
 import { notFound } from "next/navigation"
 import { IFilterPositions } from "./types";
-import DefaultProduct from "@/shared/ListItems/Default/DefaultListItem";
-
-const Product = ({ name, brand, color, price, images, category, slug }: any) => {
-	return (
-		<div className={styles.product}>
-			<Link href={`/${category}/${slug}`}>
-				<Image
-					src={images[0]}
-					alt={""}
-					className={styles.product_image}
-					width={500}
-					height={500}
-				/>
-
-				<div className={styles.product_info}>
-					<span className={styles.product_name}>{name}</span>
-					<span className={styles.product_brand}>{brand}</span>
-					<span className={styles.product_brand}>{color}</span>
-					<div className={styles.product_price}>€{price}</div>
-				</div>
-			</Link>
-		</div>
-	)
-}
+import DefaultProduct from "@/shared/Product/Default/DefaultListItem";
+import { withLink } from "@/shared/Modifiers/withLink";
+import { IProduct } from "../admin/types";
 
 export default async function Products({ searchParams, params }: { searchParams: {[key: string]: string | string[] | undefined }, params: any } ) {
 
@@ -85,7 +64,6 @@ export default async function Products({ searchParams, params }: { searchParams:
 			})
 		)
 
-
 		return (
 			<div className={styles.product_page_wrapper}>
 				<PageCategoryTitle text={params.category} count={totalCount} />
@@ -102,30 +80,34 @@ export default async function Products({ searchParams, params }: { searchParams:
 					}}
 				/>
 				<div className={styles.products_wrapper}>
-					{products.map((product: any) => (
-						// <Product
-						// 	key={product.article}
-						// 	name={product.name}
-						// 	brand={product.brand.name}
-						// 	color={product.color.name}
-						// 	price={product.price}
-						// 	images={product.images}
-						// 	article={product.article}
-						// 	category={params.category}
-						// 	slug={product.slug}
-						// />
-						<DefaultProduct
-							key={product.article}
-							name={product.name}
-							brand={product.brand.name}
-							color={product.color.name}
-							price={product.price}
-							images={product.images}
-							// article={product.article}
-							category={params.category}
-							slug={product.slug}
-						/>
-					))}
+					{products.map((product: any) => {
+						const WrappedDefaultProduct = withLink(DefaultProduct, {
+							href: `/${params.category}/${product.slug}`,
+						})
+						
+						return (
+							<DefaultProduct
+								key={product.article}
+								productId={product.productId}
+								name={product.name}
+								brand={product.brand.name}
+								color={product.color.name}
+								size={product.size}
+								price={product.price}
+								images={product.images}
+								// article={product.article}
+								category={params.category}
+								slug={product.slug}
+								settings={{
+									showBrand: true,
+									showColor: true,
+									showPrice: true,
+									withUnderlineOnProductHover: true,
+									isNameWrappedWithLink: true,
+								}}
+							/>
+						)
+					})}
 				</div>
 				<div className={styles.underline} />
 				<Pagination

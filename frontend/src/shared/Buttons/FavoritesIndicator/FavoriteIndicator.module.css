@@ -10,3 +10,12 @@
 .wrapper:focus {
     outline: none;
 }
+
+.favorites {
+    cursor: pointer;
+    top: 2px;
+    position: relative;
+    fill: none;
+}
+
+

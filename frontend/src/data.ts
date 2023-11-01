@@ -10,7 +10,7 @@ export const imageURLS = [
 export const sizeTypes = ["sm", "eu", "uk", "us"]
 
 export const sizePlaceholder = [
-	{sizeId: 1, sm: "28", eu: "20", uk: "30", us: "10", stock: 100},
+	{sizeId: '1', sm: "28", eu: "20", uk: "30", us: "10", stock: 100},
 ]
 
 export const productPlaceholderInfo: IProduct = {

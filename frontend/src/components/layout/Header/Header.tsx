@@ -53,7 +53,7 @@ export default function Header () {
 								<ProfileButton />
 							</li>
 							<li>
-								<Link href={"*"}>
+								<Link href={"/profile/favorites"}>
 									<Favorites className={styles.favorites} />
 								</Link>
 							</li>

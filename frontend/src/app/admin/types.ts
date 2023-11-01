@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react"
 
 export interface IProduct {
+	// productId: string
 	name: string
 	description: string
 	brand: string
@@ -21,6 +22,7 @@ export interface IProductSize {
   us: string
   stock: number
 }
+
 
 // type IEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 

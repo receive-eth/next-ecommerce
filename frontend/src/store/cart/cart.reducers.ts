@@ -18,6 +18,7 @@ import { IAnonimousCartResponse } from "../types"
 
 interface IInitialState {
 	isLoading: boolean
+	isCartDataChanging: boolean
 	items: Array<ICartItem>
 	totalWithoutDiscount: number
 	totalWithDiscount: number
@@ -32,6 +33,7 @@ interface IInitialState {
 
 const initialState: IInitialState = {
 	isLoading: true,
+	isCartDataChanging: false,
 	items: [],
 	selectedProducts: [],
 	totalWithoutDiscount: 0,
@@ -134,10 +136,6 @@ const cartSlice = createSlice({
 			state.isLoading = false
 		})
 
-		builder.addCase(mergeUserCart.fulfilled, (state) => {
-			state.isLoading = false
-		})
-
 
 		builder.addCase(checkDiscount.rejected, (state, action) => {
 			state.errors.discount = action.payload as string
@@ -154,11 +152,18 @@ const cartSlice = createSlice({
 			state.totalWithDiscount = totalWithDiscount
 			state.amountOfDiscount = amountOfDiscount
 			state.totalProductsCount = totalCount
-			state.isLoading = false
+
+			state.isCartDataChanging = false
+		})
+
+		builder.addCase(getUserCart.pending, (state, action) => {
+			state.isLoading = true
 		})
 
 		builder.addMatcher(
 			isAnyOf(checkDiscount.fulfilled),
+			// добавление функционала для проверки существования аккаунта 
+			// если аккаунта нет - дисконт не доступен, - необходимо авторизоваться
 			(state, action) => {
 				if (!action.payload) state.discount = null
 				else state.discount = action.payload
@@ -175,21 +180,20 @@ const cartSlice = createSlice({
 				state.amountOfDiscount = amountOfDiscount
 				state.totalProductsCount = totalCount
 				state.errors.discount = null
-				state.isLoading = false
+				
+				state.isCartDataChanging = false
 			}
 		)
 
 		builder.addMatcher(
 			isAnyOf(
-				getUserCart.pending,
 				incrementQuantity.pending,
 				decrementQuantity.pending,
 				removeFromCart.pending,
 				checkDiscount.pending,
-				mergeUserCart.pending
 			),
 			(state, _) => {
-				state.isLoading = true
+				state.isCartDataChanging = true
 			}
 		)
 		builder.addMatcher(
@@ -222,7 +226,8 @@ const cartSlice = createSlice({
 				state.amountOfDiscount = amountOfDiscount
 				state.totalProductsCount = totalCount
 
-				state.isLoading = false
+				// state.isLoading = false
+				state.isCartDataChanging = false
 			}
 		)
 	},

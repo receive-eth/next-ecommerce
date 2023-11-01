@@ -68,6 +68,8 @@
 .size_choice_options {
     min-width: 80%;
     height: 50px;
+    position: relative;
+    z-index: 1;
 }
 
 .right_info {
@@ -119,11 +121,14 @@
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;    
+    height: fit-content;
 }
 
 .add_to_cart_btn {
+    height: 50px;
     width: 80%;
+    border-radius: 5px;
 }
 
 .description_block {

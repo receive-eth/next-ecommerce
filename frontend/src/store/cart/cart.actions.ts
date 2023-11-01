@@ -19,8 +19,8 @@ export const getUserCart = createAsyncThunk(
 	async (userId: string, thunkApi) => {
 		try {
 			if (userId) {
-				console.log('passed userId: ', userId)
 				const result = await CartService.getUserCart(userId)
+				
 				return result
 			}
 			console.log('THE VALUE OF userId: ', userId)
@@ -37,6 +37,7 @@ export const getUserCart = createAsyncThunk(
 export const addToCart = createAsyncThunk(
     "cart/addToCart",
     async (userCart: IUserCart, thunkApi) => {
+		console.log('PASSED: ', userCart)
         try {
 			if (userCart.userId) {
 				const result = await CartService.addToCart(

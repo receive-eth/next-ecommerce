@@ -7,7 +7,8 @@ import { ImageChoice, Delete } from "@/components/SVGS"
 import FormInputs from '@/components/admin-fragments/FormInputs'
 import { toBase64 } from '@/utils/toBase64'
 import axios from 'axios'
-import { IProduct, IProductSize } from "./types"
+import { IProduct } from "./types"
+
 
 
 const AdminPanel = () => {
@@ -58,7 +59,7 @@ const AdminPanel = () => {
 		e.preventDefault()
 		setIsLoading(true)
 
-		const result = await axios.post(
+		await axios.post(
 			"http://localhost:5001/api/products/create",
 			formData
 		)
@@ -110,7 +111,5 @@ const AdminPanel = () => {
 		</form>
 	)
 }
-
-AdminPanel.isOnlyAdmin = true
 
 export default AdminPanel

@@ -7,7 +7,7 @@ import ListItem from '../ListItem/ListItem'
 import CartItemsLoader from '@/components/preloaders/CartItemsLoader/CartItemsLoader'
 
 const List = ({ groupedItems }: { groupedItems: Array<ICartItem> }) => {
-	const { isLoading } = useCart()
+	const { isLoading, isCartDataChanging } = useCart()
 
 	const checkWhetherLast = (index: number) => {
 		if (groupedItems.length - 1 !== index && groupedItems.length > 1) {
@@ -19,7 +19,7 @@ const List = ({ groupedItems }: { groupedItems: Array<ICartItem> }) => {
 
 	return (
 		<div className={styles.wrapper}>
-			{isLoading && <CartItemsLoader />}
+			{isCartDataChanging && <CartItemsLoader />}
 			<span className={styles.list_title}>{groupedItems[0].category}</span>
 
 			<ul className={styles.list}>

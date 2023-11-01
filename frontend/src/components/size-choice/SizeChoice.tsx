@@ -3,7 +3,17 @@
 import { useState } from 'react'
 import styles from './SizeChoice.module.css'
 import DropdownArrow from '../SVGS/DropdownArrow.svg'
+import { ISize } from '@/models/ISize'
 
+interface ISizeChoice {
+	currentSizeId: string | number | null
+	setCurrentSizeId: (newValue: any) => void
+	sizeList: ISize[]
+	sizeTypes: string[]
+	className?: string
+	height?: string
+	width?: string
+}
 
 const SizeChoice = ({
 	currentSizeId,
@@ -11,11 +21,13 @@ const SizeChoice = ({
 	sizeList,
 	sizeTypes,
 	className,
-}: any) => {
+	height = '50px',
+	width = '100%',
+}: ISizeChoice) => {
 	const [isDropdownActive, setDropdownActive] = useState<boolean>(false)
-	const [currentSizeType, setCurrentSizeType] = useState(sizeTypes[0])
+	const [currentSizeType, setCurrentSizeType] = useState<string>(sizeTypes[0])
 
-	const handleChange = (sizeId: number) => {
+	const handleChange = (sizeId: string) => {
 		if (sizeId === currentSizeId) {
 			setCurrentSizeId(null)
 			return
@@ -26,9 +38,9 @@ const SizeChoice = ({
 	const handleSizeChoiceTitle = () => {
 		if (currentSizeId) {
 			const foundObj = sizeList.find(
-				(item: any) => item.sizeId === currentSizeId
+				(item: ISize) => item.sizeId === currentSizeId
 			)
-			return `${foundObj[currentSizeType]} ${currentSizeType}`
+			if (foundObj) return `${foundObj[currentSizeType]} ${currentSizeType}`
 		} else {
 			return "Size"
 		}
@@ -43,6 +55,7 @@ const SizeChoice = ({
 		<div className={`${styles.wrapper} ${className}`}>
 			<div
 				className={handleVisibleStyle()}
+				style={{ height: `${height}`, width: `${width}` }}
 				onClick={() => setDropdownActive(!isDropdownActive)}
 			>
 				{handleSizeChoiceTitle() !== "Size" && (

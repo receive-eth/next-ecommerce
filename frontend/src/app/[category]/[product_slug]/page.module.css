@@ -101,6 +101,12 @@
     transition: .2s ease-in-out;
 }
 
+.add_to_fav_position {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .loyality_block {
     margin-top: 2rem;
     padding: 1.5rem;

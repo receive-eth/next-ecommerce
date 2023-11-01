@@ -10,7 +10,7 @@ const AuthProvider = ({ children }: any) => {
 	const { checkAuth, checkAnonimousCart } = useActions()
 	const { isLoading, user } = useAuth()
 	const { anonimousCartId } = useCart()
-	const { mergeUserCart } = useActions()
+	const { mergeUserCart, getUserFavorites } = useActions()
 
 	useEffect(() => {
 		const accessToken = localStorage.getItem("accessToken")
@@ -25,6 +25,7 @@ const AuthProvider = ({ children }: any) => {
 	useEffect(() => {
 		if (user) {
 			mergeUserCart({ anonimousCartId, loggedInUserId: user.id })
+			getUserFavorites(user.id)
 		}
 	}, [user])
 

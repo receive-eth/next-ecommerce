@@ -7,6 +7,8 @@ const errorMiddleware = require('./middlewares/error-middleware')
 const productRouter = require('./router/product-router')
 const cartRouter = require('./router/cart-router')
 const discountRouter = require("./router/discount-router")
+const favoritesRouter = require("./router/favorites-router")
+
 const PORT = process.env.PORT || 5000
 
 
@@ -26,6 +28,7 @@ app.use("/api/user", userRouter)
 app.use("/api/products", productRouter)
 app.use("/api/cart", cartRouter)
 app.use("/api/discount", discountRouter)
+app.use("/api/favorites", favoritesRouter)
 
 
 // Middleware для ошибок должен идти последним в цепочке всех middleware-ов 

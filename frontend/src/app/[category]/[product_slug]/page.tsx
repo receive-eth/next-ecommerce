@@ -5,18 +5,11 @@ import Favorites from "@/components/SVGS/Favorites.svg"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import SizeForm from "@/components/size-choice/Form"
+import FavoritesIndicator from "@/shared/Buttons/FavoritesIndicator/FavoritesIndicator"
+import AddToFavorites from "@/components/product-page-fragments/AddToFavorites/AddToFavorites"
 
 const loyalityPoints = [11990, 119.90]
 
-const AddToFavorites = () => {
-    return (
-			<div style={{position: 'absolute', right: '5%'}}>
-				<div className={styles.favorites_wrapper}>
-					<Favorites className={styles.favorites_icon} />
-				</div>
-			</div>
-		)
-}
 
 export async function generateStaticParams() {
     const response = await fetch(`http://localhost:5001/api/products/all`, {
@@ -64,7 +57,11 @@ export default async function Product({ params }: { params: any }) {
 
 			<div className={styles.product_info_container}>
 				<div className={styles.sticky}>
-					<AddToFavorites />
+					<AddToFavorites
+						productId={product.productId}
+						borderRadius="50%"
+						className={styles.add_to_fav_position}
+					/>
 					<span className={styles.product_title}>{product.name}</span>
 					<div className={styles.product_info}>
 						<span className={styles.brand}>{product.brand}</span>

@@ -11,32 +11,32 @@ datasource db {
 }
 
 model User {
-  userId         String   @id @unique @default(uuid())
-  createdAt      DateTime @default(now())
+  userId         String             @id @unique @default(uuid())
+  createdAt      DateTime           @default(now())
   firstName      String
   lastName       String
-  role           Role     @default(USER)
+  role           Role               @default(USER)
   gender         String
-  email          String   @unique
+  email          String             @unique
   password       String
-  isActivated    Boolean  @default(false)
+  isActivated    Boolean            @default(false)
   activationLink String
   token          Token?
   reviews        Review[]
   cart           Cart?
+  Favorite       Favorite?
   discount       PersonalDiscount[]
 }
 
 model PersonalDiscount {
-  id        String @id @unique @default(uuid())
-  promocode String 
-  percent   Int
-  isUsed    Boolean @default(false)
+  id             String  @id @unique @default(uuid())
+  promocode      String
+  percent        Int
+  isUsed         Boolean @default(false)
   maxActivations Int
-  user    User? @relation(fields: [userId], references: [userId], onDelete: Cascade)
-  userId  String? @default(uuid())
+  user           User?   @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  userId         String? @default(uuid())
 }
-
 
 enum DiscountStatus {
   Active
@@ -95,6 +95,7 @@ model Product {
   color        Color        @relation(fields: [colorId], references: [id])
   colorId      String
   CartItem     CartItem[]
+  Favorite     Favorite[]
   images       String[]
   price        Int
   category     Category
@@ -104,10 +105,11 @@ model Product {
   slug         String       @unique
 }
 
-// model Favorite {
-//   id String @id @unique @default (uuid())
-// }
-
+model Favorite {
+  id      String    @id @unique @default(uuid())
+  user    User      @relation(fields: [id], references: [userId], onDelete: Cascade)
+  product Product[]
+}
 
 model Size {
   sizeId   String     @id @unique @default(uuid())

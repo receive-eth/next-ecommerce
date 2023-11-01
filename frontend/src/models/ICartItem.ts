@@ -9,6 +9,7 @@ export interface ICartItem {
 	size: ISize
 	allSizes: Array<ISize>
 	isSelected: boolean
+	isInFavorites: boolean
 	avaliableSizeCount: number
 	count: number
 	color: string

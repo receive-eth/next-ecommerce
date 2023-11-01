@@ -56,7 +56,6 @@ export interface ApiError {
 	errors: []
 }
 
-
 export interface IAnonimousCartResponse {
 	userId: string,
 	createdAt: string
@@ -66,3 +65,11 @@ export interface IMergingCart {
 	anonimousCartId: string | null
 	loggedInUserId: string
 }
+
+
+// Favorites
+export interface IFavoritesRequest {
+	userId: string,
+	productId: string
+}
+

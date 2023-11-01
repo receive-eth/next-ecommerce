@@ -11,29 +11,31 @@ import { useActions } from '@/hooks/useActions'
 import { useEffect } from 'react'
 import CartNotFound from '@/components/cart-fragments/CartNotFound/CartNotFound'
 import ContentLoader from '@/components/preloaders/ContentLoader/ContentLoader'
+import CartItemsLoader from "@/components/preloaders/CartItemsLoader/CartItemsLoader"
 
 export default function Cart() {
 	const { user } = useAuth()
-	const { getUserCart, mergeUserCart } = useActions()
-	const { isLoading, items, anonimousCartId } = useCart()
+	const { getUserCart } = useActions()
+	const { isLoading, items, anonimousCartId, errors } = useCart()
 
 	useEffect(() => {
 		getUserCart(user?.id || anonimousCartId)
 	}, [])
 
-		if (items.length === 0 && isLoading) return <ContentLoader />
-		if (items.length === 0 && !isLoading) return <CartNotFound />
+	if (isLoading) return <ContentLoader />
+	if (items.length === 0) return <CartNotFound />
 
-		return (
-			<div className={styles.wrapper}>
-				<div className={styles.left_block}>
-					<CartHeader />
-					<GroupedLists />
-				</div>
-				<div className={styles.right_block}>
-					<OrderAmount />
-					<Total />
-				</div>
+
+	return (
+		<div className={styles.wrapper}>
+			<div className={styles.left_block}>
+				<CartHeader />
+				<GroupedLists />
 			</div>
-		)
+			<div className={styles.right_block}>
+				<OrderAmount />
+				<Total />
+			</div>
+		</div>
+	)
 }

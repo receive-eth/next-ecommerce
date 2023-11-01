@@ -28,13 +28,16 @@ class UserService {
 				email,
 				password: hashedPassword,
 				activationLink,
+				Favorite: {
+					create: {}
+				}
 			},
 		})
 
-		await mailService.sendActivationMail(
-			email,
-			`${process.env.API_URL}/api/activate/${activationLink}`
-		)
+		// await mailService.sendActivationMail(
+		// 	email,
+		// 	`${process.env.API_URL}/api/activate/${activationLink}`
+		// )
 
 		const userDto = new UserDto(user)
 		const tokens = tokenService.generateTokens({ ...userDto })

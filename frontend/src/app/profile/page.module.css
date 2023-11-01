@@ -86,3 +86,13 @@
     margin-top: 1rem;
     font-size: .9rem;
 }
+
+
+.products_wrapper {
+    margin-top: 1rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-content: center;
+    grid-gap: 50px 20px;
+}

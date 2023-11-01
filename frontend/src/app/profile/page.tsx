@@ -1,11 +1,25 @@
 'use client'
+
+import ContentLoader from '@/components/preloaders/ContentLoader/ContentLoader'
 import styles from './page.module.css'
 import { useAuth } from '@/hooks/useAuth'
+import { useFavorites } from '@/hooks/useFavorites'
 import Link from 'next/link'
+import { useEffect } from 'react'
+import { useActions } from '@/hooks/useActions'
+import DefaultProduct from '@/shared/Product/Default/DefaultListItem'
 
 export default function Profile() {
 	
 	const { user } = useAuth()
+	const { getUserFavorites } = useActions()
+	const { products, isLoading } = useFavorites()
+
+	useEffect(() => {
+		getUserFavorites(user?.id)
+	}, [])
+
+	if (isLoading) return <ContentLoader />
 
 	return (
 		<div className={styles.container}>
@@ -55,11 +69,37 @@ export default function Profile() {
 			<div className={styles.wishlist_block}>
 				<div className={styles.title_container}>
 					<span>My Wish List</span>
-					<Link href={"#"}>Go To Wish List</Link>
+					<Link href={"/profile/favorites"}>Go To Favorites</Link>
 				</div>
-				<div className={styles.wishlist_items}>
-					You have no items in your wish list.
-				</div>
+
+				{products?.length === 0 ? (
+					<div className={styles.wishlist_items}>
+						You have no items in your wish list.
+					</div>
+				) : (
+					<div className={styles.products_wrapper}>
+						{products?.map((item, index) => (
+							<DefaultProduct
+								key={index}
+								productId={item.productId}
+								name={item.name}
+								brand={item.brand}
+								color={item.color}
+								size={item.size}
+								price={item.price}
+								images={item.images}
+								slug={item.slug}
+								category={item.category}
+								settings={{
+									showBrand: true,
+									showPrice: true,
+									withMenu: true,
+									isNameWrappedWithLink: true,
+								}}
+							/>
+						))}
+					</div>
+				)}
 			</div>
 		</div>
 	)

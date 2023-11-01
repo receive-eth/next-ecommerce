@@ -6,7 +6,6 @@ import { useActions } from '@/hooks/useActions'
 import { useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import { FormEvent } from 'react'
-import AuthProvider from '@/providers/AuthProvider'
 import { sizeTypes } from '@/data'
 import { useCart } from '@/hooks/useCart'
 
@@ -16,7 +15,7 @@ const SizeForm = ({ productId, sizes }: any) => {
 	const { anonimousCartId } = useCart()
 	const { addToCart } = useActions()
 
-	const [currentSizeId, setCurrentSizeId] = useState<number | null>(null)
+	const [currentSizeId, setCurrentSizeId] = useState<string | null>(null)
 
 	const handleSumbit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -36,10 +35,13 @@ const SizeForm = ({ productId, sizes }: any) => {
 			{!isLoading ? (
 				<form className={styles.form} onSubmit={(e) => handleSumbit(e)}>
 					<SizeChoice
+						className={styles.size_choice}
 						currentSizeId={currentSizeId}
 						setCurrentSizeId={setCurrentSizeId}
 						sizeTypes={sizeTypes}
 						sizeList={sizes}
+						height={'50px'}
+						width='100%'
 					/>
 					<button className={styles.formButton} type="submit">
 						Add to cart

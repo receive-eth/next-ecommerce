@@ -6,12 +6,17 @@ import styles from './ProductPopup.module.css'
 import { sizeTypes } from '@/data'
 import SizeChoice from '@/components/size-choice/SizeChoice'
 import { useState } from 'react'
-import AddToFavorites from '@/shared/Buttons/AddToFavorites/AddToFavorites'
+import AddToFavorites from "@/components/product-page-fragments/AddToFavorites/AddToFavorites"
+
 import ControlledButton from '@/shared/Buttons/ControledButton'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { ICartItem } from '@/models/ICartItem'
 import { ClosePopup } from '@/components/SVGS'
+import { useCart } from '@/hooks/useCart'
+import { useActions } from '@/hooks/useActions'
+import { useAuth } from '@/hooks/useAuth'
+import FavoritesIndicator from '@/shared/Buttons/FavoritesIndicator/FavoritesIndicator'
 
 interface IProductPopup {
 	isShown: boolean
@@ -23,6 +28,7 @@ const ProductPopup = ({
 	isShown,
 	setShown,
 	productData: {
+		productId,
 		name,
 		size,
 		allSizes,
@@ -48,6 +54,11 @@ const ProductPopup = ({
 
 	const [outsideRef] = useClickOutside(() => handleClosePopup())
 	const [_, unlockScroll] = useBodyScrollLock()
+
+
+	const { addToCart } = useActions()
+	const { anonimousCartId } = useCart()
+	const { user } = useAuth()
 
 	return (
 		<>
@@ -104,8 +115,18 @@ const ProductPopup = ({
 									<ControlledButton
 										title="Add to cart"
 										className={styles.add_to_cart_btn}
+										onClick={() =>
+											addToCart({
+												userId: user?.id || anonimousCartId,
+												productId: productId,
+												sizeId: currentSizeId || "",
+											})
+										}
 									/>
-									<AddToFavorites type="rectangle" radius={5} />
+									<AddToFavorites
+										productId={productId}
+										borderRadius="5px"
+									/>
 								</div>
 							</div>
 

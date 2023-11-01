@@ -22,3 +22,5 @@ export { default as ClosePopup } from "./Close_popup.svg"
 
 export { default as FavoritesHeart } from './Heart.svg'
 export { default as FavoritesHeartSelected } from "./Heart_selected.svg"
+export { default as FavoritesHeartGray } from './Heart_gray.svg'
+export { default as CustomFavoritesHeart } from "./Favorites/123.svg"
