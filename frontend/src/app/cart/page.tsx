@@ -11,7 +11,6 @@ import { useActions } from '@/hooks/useActions'
 import { useEffect } from 'react'
 import CartNotFound from '@/components/cart-fragments/CartNotFound/CartNotFound'
 import ContentLoader from '@/components/preloaders/ContentLoader/ContentLoader'
-import CartItemsLoader from "@/components/preloaders/CartItemsLoader/CartItemsLoader"
 
 export default function Cart() {
 	const { user } = useAuth()

@@ -19,7 +19,6 @@ export const addToFavorites = createAsyncThunk(
 	async ({ userId, productId }: IFavoritesRequest, thunkApi) => {
         try {
             const response = await FavoritesService.addToFavorites(userId, productId)
-            console.log('response: ', response)
             return response
         } catch(e) {
             thunkApi.rejectWithValue(e)

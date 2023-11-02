@@ -5,6 +5,7 @@ export default class FavoritesService {
 		const result = await axios.get(
 			`http://localhost:5001/api/favorites/get-user-favorites/${userId}`
 		)
+
 		return result.data
 	}
 
@@ -13,6 +14,7 @@ export default class FavoritesService {
 			userId,
 			productId,
 		})
+		await new Promise((resolve) => setTimeout(resolve, 200))
 		return result.data
 	}
 
@@ -23,6 +25,7 @@ export default class FavoritesService {
 				data: { userId, productId },
 			}
 		)
+		await new Promise((resolve) => setTimeout(resolve, 200))
 		return result.data
 	}
 }

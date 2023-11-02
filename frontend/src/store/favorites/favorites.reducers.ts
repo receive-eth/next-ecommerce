@@ -6,6 +6,7 @@ import { IFavorites } from "@/models/IFavorites";
 
 interface IInitialState {
 	isLoading: boolean
+	isFavoritesDataChanging: boolean, 
 	products: IProduct[]
 	errors: {}
 }
@@ -13,6 +14,7 @@ interface IInitialState {
 const initialState: IInitialState = {
 	products: [],
 	isLoading: false,
+	isFavoritesDataChanging: false,
 	errors: {},
 }
 
@@ -22,25 +24,26 @@ const favoritesSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder
+			.addCase(getUserFavorites.pending, (state, action) => {
+				state.isLoading = true
+			})
+			.addCase(getUserFavorites.fulfilled, (state, action) => {
+				state.products = action.payload?.product
+				state.isLoading = false
+			})
+
 			.addMatcher(
-				isAnyOf(
-					getUserFavorites.fulfilled,
-					addToFavorites.fulfilled,
-					removeFromFavorites.fulfilled
-				),
-				(state, action: PayloadAction<IFavorites>) => {
-					state.products = action.payload?.product
-					state.isLoading = false
+				isAnyOf(addToFavorites.pending, removeFromFavorites.pending),
+				(state) => {
+					state.isFavoritesDataChanging = true
 				}
 			)
+
 			.addMatcher(
-				isAnyOf(
-					getUserFavorites.pending,
-					addToFavorites.pending,
-					removeFromFavorites.pending
-				),
-				(state) => {
-					state.isLoading = true
+				isAnyOf(addToFavorites.fulfilled, removeFromFavorites.fulfilled),
+				(state, action: PayloadAction<IFavorites>) => {
+					state.products = action.payload?.product
+					state.isFavoritesDataChanging = false
 				}
 			)
 	},

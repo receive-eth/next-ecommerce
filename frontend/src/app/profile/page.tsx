@@ -5,19 +5,13 @@ import styles from './page.module.css'
 import { useAuth } from '@/hooks/useAuth'
 import { useFavorites } from '@/hooks/useFavorites'
 import Link from 'next/link'
-import { useEffect } from 'react'
 import { useActions } from '@/hooks/useActions'
 import DefaultProduct from '@/shared/Product/Default/DefaultListItem'
 
 export default function Profile() {
 	
 	const { user } = useAuth()
-	const { getUserFavorites } = useActions()
 	const { products, isLoading } = useFavorites()
-
-	useEffect(() => {
-		getUserFavorites(user?.id)
-	}, [])
 
 	if (isLoading) return <ContentLoader />
 
@@ -89,12 +83,13 @@ export default function Profile() {
 								price={item.price}
 								images={item.images}
 								slug={item.slug}
-								category={item.category}
+								category={item.menuCategory.toLowerCase()}
 								settings={{
 									showBrand: true,
 									showPrice: true,
 									withMenu: true,
 									isNameWrappedWithLink: true,
+									withUnderlineOnProductHover: true,
 								}}
 							/>
 						))}

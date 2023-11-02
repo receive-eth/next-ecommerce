@@ -30,6 +30,9 @@ class UserService {
 				activationLink,
 				Favorite: {
 					create: {}
+				},
+				cart: {
+					create: {}
 				}
 			},
 		})

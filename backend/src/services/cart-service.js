@@ -1,7 +1,6 @@
 const prisma = require('../../config/prismaClient')
 const ApiError = require('../exceptions/api-error')
 const cartHelper = require('../helpers/cart-helper')
-const productService = require('../services/product-service')
 const uuid = require('uuid')
 
 class CartService {
@@ -16,7 +15,7 @@ class CartService {
 	}
 
 	async createUserCart(userId, productId, sizeId, count = 1) {
-		const result = await prisma.cart.create({
+		await prisma.cart.create({
 			data: {
 				user: { connect: { userId } },
 				Items: {
@@ -36,15 +35,16 @@ class CartService {
 				Items: true,
 			},
 		})
-		return result
+
+		return await this.getUserCart(cartId)
 	}
 
 
-	async createAnonimousCart(productId, sizeId, count) {
+	async createAnonimousCart() {
 		const firstName = `anonimous_user`
 		const lastName = `${uuid.v4()}`
 
-		const createdUser = await prisma.user.create({
+		const anonimousUser = await prisma.user.create({
 			data: {
 				firstName,
 				lastName,
@@ -52,6 +52,7 @@ class CartService {
 				email: firstName + lastName + `@gmail.com`,
 				password: uuid.v4(),
 				activationLink: "",
+				cart: { create: {} }
 			},
 			select: {
 				userId: true,
@@ -59,7 +60,7 @@ class CartService {
 			}
 		})
 
-		return createdUser
+		return anonimousUser
 	}
 
 	async checkAnonimousCart(anonimousCartId = 'asd') {
@@ -70,6 +71,7 @@ class CartService {
 		if (!result) {
 			return this.createAnonimousCart()
 		}
+		
 		return result
 	}
 
@@ -102,7 +104,7 @@ class CartService {
 			return await this.increment(cartId, productId)
 		}
 
-		const result = await prisma.cart.update({
+		await prisma.cart.update({
 			where: {
 				cartId,
 			},
@@ -119,8 +121,13 @@ class CartService {
 					},
 				},
 			},
+			select: {
+				cartId: true,
+				Items: { select: { productId: true, count: true } },
+			},
 		})
-		return result
+		
+		return await this.getUserCart(cartId)
 	}
 
 	async removeFromCart(cartId, productIds = []) {
@@ -145,7 +152,7 @@ class CartService {
 	}
 
 	async increment(cartId, productId) {
-		const result = await prisma.cartItem.updateMany({
+		await prisma.cartItem.updateMany({
 			where: {
 				cartId: { equals: cartId },
 				productId: { equals: productId },
@@ -153,14 +160,11 @@ class CartService {
 			data: { count: { increment: 1 } },
 		})
 
-		console.log("result: ", result)
 		return await this.getUserCart(cartId)
-
-		// return result
 	}
 
 	async decrement(cartId, productId) {
-		const result = await prisma.cartItem.updateMany({
+		await prisma.cartItem.updateMany({
 			where: {
 				cartId: { equals: cartId },
 				productId: { equals: productId },
@@ -172,7 +176,7 @@ class CartService {
 	}
 
 	async toggle(cartId, cartItemIds, isSelected) {
-		const result = await prisma.cartItem.updateMany({
+		await prisma.cartItem.updateMany({
 			where: {
 				cartId: { equals: cartId },
 				id: { in: cartItemIds },

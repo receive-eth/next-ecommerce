@@ -20,6 +20,11 @@
     grid-gap: 50px 20px;
 }
 
+.products_text_instead {
+    font-size: .9rem;
+    color: #585858;
+}
+
 
 @media screen and (max-width: 950px) {
     .products_wrapper {

@@ -1,8 +1,8 @@
-import styles from './CartItemsLoader.module.css'
+import styles from './ItemsLoader.module.css'
 import { useState } from 'react'
 import ProgressBar from '../ProgressBar/ProgressBar'
 
-const CartItemsLoader = () => {
+const ItemsLoader = () => {
 
     const [filled, setFilled] = useState<number>(0)
 
@@ -14,4 +14,4 @@ const CartItemsLoader = () => {
 		)
 }
 
-export default CartItemsLoader
+export default ItemsLoader

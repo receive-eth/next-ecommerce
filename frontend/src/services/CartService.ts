@@ -27,7 +27,9 @@ export default class CartService {
 				isAnonimous,
 			})
 			.then((res) => res.data)
-		console.log(result)
+
+		await new Promise((resolve) => setTimeout(resolve, 200))
+
 		return result
 	}
 
@@ -85,6 +87,8 @@ export default class CartService {
 			})
 			.then((res) => res.data)
 
+		await new Promise((resolve) => setTimeout(resolve, 200))
+		
 		return result
 	}
 

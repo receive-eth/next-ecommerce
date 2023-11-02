@@ -5,10 +5,11 @@ import { useActions } from "@/hooks/useActions"
 import { useAuth } from "@/hooks/useAuth"
 import { useEffect } from "react"
 import { useCart } from "@/hooks/useCart"
+import { useFavorites } from "@/hooks/useFavorites"
 
-const AuthProvider = ({ children }: any) => {
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const { checkAuth, checkAnonimousCart } = useActions()
-	const { isLoading, user } = useAuth()
+	const { isLoading: isUserLoading, user } = useAuth()
 	const { anonimousCartId } = useCart()
 	const { mergeUserCart, getUserFavorites } = useActions()
 
@@ -25,11 +26,11 @@ const AuthProvider = ({ children }: any) => {
 	useEffect(() => {
 		if (user) {
 			mergeUserCart({ anonimousCartId, loggedInUserId: user.id })
-			getUserFavorites(user.id)
+			getUserFavorites(user?.id)
 		}
 	}, [user])
 
-	if (isLoading) return <ContentLoader />
+	if (isUserLoading) return <ContentLoader />
 	if (!user && !anonimousCartId) return <ContentLoader />
 
 	return <>{children}</>

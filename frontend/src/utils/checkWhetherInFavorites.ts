@@ -10,7 +10,6 @@ interface ICheckWhetherInFavorites {
 
 
 export const checkWhetherInFavorites = ({ user, isLoading, products = [], productId }: ICheckWhetherInFavorites) => {
-	console.log('passed productId: ', productId)
 	if (!user) return false
 	if (isLoading || products?.length === 0) return false
 

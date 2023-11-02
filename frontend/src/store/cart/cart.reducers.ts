@@ -10,6 +10,7 @@ import {
 	createAnonimousCart,
 	checkAnonimousCart,
 	mergeUserCart,
+	addToCart,
 } from "./cart.actions"
 import { ICartItem } from "@/models/ICartItem"
 import { areMultipleInArray } from "@/utils/Verify"
@@ -54,11 +55,14 @@ const checkIfAllSelected = (selectedProducts: ICartItem[], allItems: ICartItem[]
 
 const calcValues = (items: Array<ICartItem>, discountPercent?: number | undefined ) => {
 
+	console.log('items: ', items)
 	const { totalCount, totalWithoutDicount } = items?.reduce((accumulator, product) => {
 		accumulator.totalCount += product.count
 		accumulator.totalWithoutDicount += product.price * product.count
 		return accumulator
 	}, {totalCount: 0, totalWithoutDicount: 0})
+
+	console.log('totalCount: ', totalCount)
 
 	let totalWithDiscount = totalWithoutDicount
 	let amountOfDiscount = 0
@@ -187,10 +191,12 @@ const cartSlice = createSlice({
 
 		builder.addMatcher(
 			isAnyOf(
+				addToCart.pending,
 				incrementQuantity.pending,
 				decrementQuantity.pending,
 				removeFromCart.pending,
 				checkDiscount.pending,
+				toggleProducts.pending
 			),
 			(state, _) => {
 				state.isCartDataChanging = true
@@ -198,10 +204,12 @@ const cartSlice = createSlice({
 		)
 		builder.addMatcher(
 			isAnyOf(
+				addToCart.fulfilled,
 				incrementQuantity.fulfilled,
 				decrementQuantity.fulfilled,
 				removeFromCart.fulfilled,
 				toggleProducts.fulfilled,
+				toggleProducts.fulfilled
 			),
 			(state, action: PayloadAction<any>) => {
 				state.items = action.payload
@@ -225,8 +233,6 @@ const cartSlice = createSlice({
 				state.totalWithDiscount = totalWithDiscount
 				state.amountOfDiscount = amountOfDiscount
 				state.totalProductsCount = totalCount
-
-				// state.isLoading = false
 				state.isCartDataChanging = false
 			}
 		)

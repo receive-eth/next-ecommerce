@@ -115,12 +115,14 @@ const ProductPopup = ({
 									<ControlledButton
 										title="Add to cart"
 										className={styles.add_to_cart_btn}
-										onClick={() =>
+										onClick={() => {
 											addToCart({
 												userId: user?.id || anonimousCartId,
 												productId: productId,
 												sizeId: currentSizeId || "",
 											})
+											unlockScroll()
+										}
 										}
 									/>
 									<AddToFavorites
